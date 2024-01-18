@@ -1,0 +1,7 @@
+---
+- name: sampleplaybook
+  hosts: localhost
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "hellow world!"
