@@ -7,21 +7,25 @@
 - Any linux server with 4 CPUs and 4 GB of RAM preferred for optimal performance.
 
 1. Make sure Ansible is installed
-    <sudo apt update>
-    <sudo apt install software-properties-common>
-    <sudo add-apt-repository --yes --update ppa:ansible/ansible>
-    <sudo apt install ansible>
+
+    ```sudo apt update
+    sudo apt install software-properties-common
+    sudo add-apt-repository --yes --update ppa:ansible/ansible
+    sudo apt install ansible```
+
 > Note: this is for Ubuntu server 20.0.4 and above.
 
-2. Generate a secret key : <pwgen -N 1 -s 30 > /home/user/directory-name/pwgen.txt>
+2. Generate a secret key : `pwgen -N 1 -s 30 /home/user/directory-name/pwgen.txt`
 3. view the Secret key
 4. Create a ansible.cfg file with the following contents.
-    <mkdir DirectoryProject>
-    <cd DirectoryProject/>
-    <vim ansible.cfg>
-    <# Configure>
-    <[defaults]>
-    <inventory = ./inventory>
+```
+    mkdir DirectoryProject
+    cd DirectoryProject/
+    vim ansible.cfg
+    # Configure
+    [defaults]
+    inventory = ./inventory```
+    
 5. Navigate to the <DirectoryProject> dir and save the "setup-awx-ansible.yml" file.
 6. run the Playbook with <ansible-playbook setup-awx-ansible.yml>
 7. Download and unzip the awx package from :
