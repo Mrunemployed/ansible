@@ -2,7 +2,7 @@ import random
 import time
 from concurrent.futures import ThreadPoolExecutor
 from threading import current_thread
-from filter import filter
+from poller.filter import filter
 import pandas as pd
 import queue
  
