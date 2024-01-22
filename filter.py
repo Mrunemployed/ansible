@@ -5,7 +5,7 @@ import requests
 from requests.models import Response
 from datetime import datetime
 import logging
-
+ 
 date = datetime.today()
 date = datetime.strftime(date,"%d-%b-%Y")
 logging.basicConfig(filename=f"logs//{date}.log",format='%(asctime)s %(message)s',filemode='a',encoding="utf-8")
