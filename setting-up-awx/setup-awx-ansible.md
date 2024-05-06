@@ -1,5 +1,6 @@
 # Setup AWX-ANSIBLE
 
+
 - Guidelines on how to setup ansibleAWX quick and easy.
 
 ## Setup the server
