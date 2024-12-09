@@ -10,6 +10,9 @@
   hosts: localhost
   become: Yes
   tasks:
+    - name: create a file
+      shell: touch a.txt
+    
     - name: list directories
       ansible.builtin.shell: ls
       register: directories
