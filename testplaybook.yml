@@ -8,15 +8,20 @@
 
 - name: practice ansible snippets list files
   hosts: localhost
-  become: yes
+  become: true
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
         paths: /etc
-        recurse: yes
-
+        file-type: file
       register: output
     
     - name: show
       debug:
-        msg: "{{output.files | list}}"
+        msg: "{{output.files}}"
+
+    - name: copy all matching files to specified directory
+      ansible.builtin.copy:
+        src: "{{item.path}}"
+        dest: /home/awxadm/copied_etc/
+      loop: "{{output.file}}"
