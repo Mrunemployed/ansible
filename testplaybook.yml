@@ -13,11 +13,10 @@
     - name: list file and folders in a directory
       ansible.builtin.find:
         paths: /tmp
-        patterns: "a*"
         recurse: yes
 
       register: output
     
     - name: show
       debug:
-        msg: "{{output.files | map(attribute='path') | list}}"
+        msg: "{{output.files | list}}"
