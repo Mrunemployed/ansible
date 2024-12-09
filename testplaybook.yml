@@ -6,15 +6,14 @@
       debug:
         msg: "hellow world!"
 
-- name: practice ansible snippets
+- name: practice ansible snippets list files
   hosts: localhost
   become: yes
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
         paths: /tmp
-        patterns: "ansible*"
-        file_type: directory
+        patterns: "a*"
         recurse: yes
 
       register: output
