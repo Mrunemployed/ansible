@@ -14,8 +14,9 @@
       ansible.builtin.find:
         paths: /tmp
         recurse: yes
+
       register: output
     
     - name: show
       debug:
-        msg: {output}
+        msg: {{output}}
