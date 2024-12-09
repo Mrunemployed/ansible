@@ -8,15 +8,14 @@
 
 - name: practice ansible snippets
   hosts: localhost
-  become: Yes
+  become: yes
   tasks:
-    - name: create a file
-      shell: touch a.txt
+    - name: list file and folders in a directory
+      ansible.builtin.find:
+        paths: /tmp
+        recurse: yes
+      register: output
     
-    - name: list directories
-      ansible.builtin.shell: ls
-      register: directories
-    
-    - name: show directories
+    - name: show
       debug:
-        msg: {directories}
+        msg: output
