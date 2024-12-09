@@ -18,4 +18,4 @@
     
     - name: show
       debug:
-        msg: output
+        msg: {output}
