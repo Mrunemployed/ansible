@@ -12,7 +12,7 @@
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
-        paths: /tmp
+        paths: /etc
         recurse: yes
 
       register: output
