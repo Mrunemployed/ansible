@@ -21,4 +21,4 @@
     
     - name: show
       debug:
-        msg: "{{output.files}}"
+        msg: "{{output.files | map(attribute='path') | list}}"
