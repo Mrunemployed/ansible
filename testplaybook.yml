@@ -13,6 +13,7 @@
     - name: list file and folders in a directory
       ansible.builtin.find:
         paths: /tmp
+        file_type: directory
         recurse: yes
 
       register: output
@@ -20,4 +21,3 @@
     - name: show
       debug:
         msg: "{{output}}"
-        
