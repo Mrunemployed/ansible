@@ -5,3 +5,15 @@
     - name: Print a message
       debug:
         msg: "hellow world!"
+
+- name: practice ansible snippets
+  hosts: localhost
+  become: Yes
+  tasks:
+    - name: list directories
+      ansible.builtin.shell: ls
+      register: directories
+    
+    - name: show directories
+      debug:
+        msg: {directories}
