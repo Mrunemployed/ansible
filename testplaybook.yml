@@ -13,7 +13,6 @@
     - name: list file and folders in a directory
       ansible.builtin.find:
         paths: /etc
-        file-type: file
       register: output
     
     - name: show
