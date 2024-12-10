@@ -21,7 +21,7 @@
         msg: "{{output.files}}"
 
     - name: copy all matching files to specified directory
-      ansible.builtin.copy:
+      ansible.builtin.find:
         src: "{{item.path}}"
         dest: /home/awxadm/copied_etc/
       loop: "{{output.file}}"
