@@ -23,4 +23,4 @@
       ansible.builtin.find:
         src: "{{item.path}}"
         dest: /home/awxadm/copied_etc/
-      loop: "{{output.file}}"
+      loop: "{{output.files}}"
