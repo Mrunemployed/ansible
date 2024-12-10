@@ -17,7 +17,7 @@
     
     - name: show
       debug:
-        msg: "{{output.files.path}}"
+        msg: "{{output.files | map(attributes='path') | list}}"
 
     - name: copy all matching files to specified directory
       ansible.builtin.find:
