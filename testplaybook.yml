@@ -17,11 +17,11 @@
 
     - name: run whoami
       ansible.builtin.command: whoami
-      register: cmd_op
+      register: cmdop.stdout
 
     - name: show user account
       debug:
-        msg: "{{cmp_op}}"
+        msg: "{{cmpop}}"
 
     - name: show
       debug:
