@@ -1,0 +1,32 @@
+---
+name: Deploy nginx
+hosts: web_servers
+vars:
+  nginx_package: nginx
+  nginx_service: nginx
+
+tasks:
+  - name: Install packages
+  ansible.builtin.yum:
+    name: "{{nginx_package}}"
+    state: present
+  register: output
+  
+  - name: show result of installation
+    debug:
+      msg: "{{output.state}}"
+    loop: output
+
+  - name: get this
+    ansible.builtin.uri:
+      url: "https://google.com"
+      method: GET
+      return_content: no
+      body:
+        server
+      body_format: json
+- name: play 2
+  vars:
+    some_str: "  text "
+  
+  
