@@ -12,7 +12,7 @@
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
-        paths: /home/awxadm/target/
+        paths: /home/awxadm/target
       register: output
 
     - name: show
