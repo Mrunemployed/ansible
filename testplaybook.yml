@@ -31,4 +31,5 @@
       ansible.builtin.copy:
         src: "{{item.path}}"
         dest: /home/awxadm/copied_etc/
+        mode: u=rw,g=wx,o=r
       loop: "{{output.files}}"
