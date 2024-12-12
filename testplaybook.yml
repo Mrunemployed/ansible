@@ -16,7 +16,7 @@
       register: output
 
     - name: run whoami
-      cmd: whoami
+      ansible.builtin.command: whoami
       register: cmd_op
 
     - name: show user account
