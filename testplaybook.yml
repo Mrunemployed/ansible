@@ -14,7 +14,15 @@
       ansible.builtin.find:
         paths: /etc
       register: output
-    
+
+    - name: run whoami
+      cmd: whoami
+      register: cmd_op
+
+    - name: show user account
+      debug:
+        msg: "{{cmp_op}}"
+
     - name: show
       debug:
         msg: "{{output.files | map(attribute='path') | list}}"
