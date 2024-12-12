@@ -12,16 +12,8 @@
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
-        paths: /etc
+        paths: /home/awxadm/target/
       register: output
-
-    - name: run whoami
-      ansible.builtin.command: whoami
-      register: cmdop
-
-    - name: show user account
-      debug:
-        msg: "{{cmdop}}"
 
     - name: show
       debug:
