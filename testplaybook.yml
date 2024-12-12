@@ -8,11 +8,11 @@
 
 - name: practice ansible snippets list files
   hosts: localhost
-  become: true
+  become: no
   tasks:
     - name: list file and folders in a directory
       ansible.builtin.find:
-        paths: /home/awxadm/target
+        paths: /etc
       register: output
 
     - name: show
