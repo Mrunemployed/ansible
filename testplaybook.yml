@@ -29,5 +29,6 @@
     
     - name: show success or failure
       debug:
-        msg: "{{output_list | map(attributes='rc' | list)}}"
+        msg: "{{item.rc)}}"
+      loop: output_list
 
