@@ -14,7 +14,7 @@
       ansible.builtin.find:
         paths: ~/target
       register: output
-      failed_when: output.json.rc != 0
+      failed_when: output.rc != 0
 
     - name: show
       debug:

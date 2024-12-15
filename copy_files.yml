@@ -1,0 +1,70 @@
+---
+
+- name: copy files using complex logical operations
+  hosts: localhost
+  become: no
+  tasks:
+
+    - name: set path var
+      set_fact:
+        input_paths: "{{ lookup('ansible.builtin.file', '/home/awxadm/input') | split('\n') }}"
+
+    - name: show contents
+      debug:
+        var: input_paths
+
+    - name: find files in directory
+      ansible.builtin.find:
+        paths: '{{ ansible_env.HOME }}{{ item }}'
+      loop: "{{ input_paths }}"
+      register: output
+        #failed_when: output.skipped_paths | length != 0
+
+    - name: show output
+      debug:
+        var: output.results
+
+    - name: set empty var
+      set_fact:
+        failed_paths:
+          success: []
+          failure: []
+
+    - name: find the invalid paths or failed paths
+      set_fact:
+        failed_paths:
+          success: "{{ failed_paths.success + ([item.item] if item.skipped_paths | length == 0 else []) }}"
+          failure: "{{ failed_paths.failure + ([item.item] if item.skipped_paths | length != 0 else []) }}"
+      loop: "{{output.results}}"
+        #vars:
+        #failed_paths: "{{ failed_paths | default({'success': [], 'failure': []}) }}"
+        #when: "{{item.skipped_paths | length != 0 }}"
+
+    - name: show failed
+      debug:
+        var: failed_paths
+
+- name: copy from input to target
+  hosts: localhost
+  become: no
+  tasks:
+
+    - name: create a directory to copy files
+      ansible.builtin.file:
+        path: "{{ lookup('ansible.builtin.env','HOME') }}/copied_{{ ansible_date_time.date }}"
+        state: directory
+      register: output
+
+    - name: copy files from successes
+      ansible.builtin.copy:
+        src: "{{ lookup('ansible.builtin.env','HOME') }}/{{item}}"
+        dest: "{{ lookup('ansible.builtin.env','HOME') }}/copied_{{ ansible_date_time.date }}/{{ item | regex_replace('/','copied_') }}"
+
+      loop: "{{failed_paths.success}}"
+      register: copy_output
+        #failed_when: copy_output | selectattr('failed','equalto', True) | list | length > 0
+
+    - name: copy results
+      debug:
+        var: copy_output
+      failed_when: copy_output.results | selectattr('failed','equalto', True) | list | length > 0
