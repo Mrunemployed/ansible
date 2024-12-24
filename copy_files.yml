@@ -7,7 +7,7 @@
   
       - name: set path var
         set_fact:
-          input_paths: "{{ lookup('ansible.builtin.file', '/home/awxadm/input') | split('\n') }}"
+          input_paths: "{{ lookup('ansible.builtin.file', '/home/awxadm/input') | ansible.builtin.split('\n') }}"
   
       - name: show contents
         debug:
