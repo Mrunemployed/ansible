@@ -1,28 +1,11 @@
-- name: print the servicenow creds
-  ansible.builtin.debug:
-    msg: "{{ servicenow_Username}}, {{ servicenow_Password }}"
-  ignore_errors: yes
 
-- name: print the servicenow creds
-  ansible.builtin.debug:
-    msg: "{{ servicenow.Username}}, {{ servicenow.Password }}"
-  ignore_errors: yes
-
-- name: print the servicenow creds
-  ansible.builtin.debug:
-    msg: "{{ Username}}, {{ Password }}"
-  ignore_errors: yes
-
-  
-- name: print the servicenow creds
-  ansible.builtin.debug:
-    msg: "{{ username }}, {{ password }}"
-  ignore_errors: yes
-
-- name: print the servicenow creds
-  ansible.builtin.debug:
-    msg: "{{ ansible_user }}, {{ ansible_password }}"
-  ignore_errors: yes
+#  This line shows the password being injected at playbook runtime, in this case the machine credentials
+#  are showing up under ansible_user and ansible_password vars to check what other vars are being injected
+#  debug out ansible_password
+# - name: print the servicenow creds
+#   ansible.builtin.debug:
+#     msg: "{{ ansible_user }}, {{ ansible_password }}"
+#   ignore_errors: yes
 
 - name: fetch incident data
   uri:
