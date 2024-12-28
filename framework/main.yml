@@ -5,6 +5,12 @@
   vars:
     show_output: True
     write_to_file: True
-  roles:
-    - role: servicenow
-      tasks_from: fetch.yml
+  # roles:
+  #   - role: servicenow
+  #     tasks_from: fetch.yml
+  tasks:
+
+    - name: fetch tickets
+      include_role:
+        name: servicenow
+        tasks_from: fetch.yml
