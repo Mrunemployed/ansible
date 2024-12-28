@@ -1,11 +1,22 @@
 - name: print the servicenow creds
   ansible.builtin.debug:
-    msg: "{{ servicenow_username}}, {{ servicenow_password }}"
+    msg: "{{ servicenow_Username}}, {{ servicenow_Password }}"
   ignore_errors: yes
 
 - name: print the servicenow creds
   ansible.builtin.debug:
-    msg: "{{ servicenow.username}}, {{ servicenow.password }}"
+    msg: "{{ servicenow.Username}}, {{ servicenow.Password }}"
+  ignore_errors: yes
+
+- name: print the servicenow creds
+  ansible.builtin.debug:
+    msg: "{{ Username}}, {{ Password }}"
+  ignore_errors: yes
+
+  
+- name: print the servicenow creds
+  ansible.builtin.debug:
+    msg: "{{ username }}, {{ password }}"
   ignore_errors: yes
 
 - name: print the servicenow creds
