@@ -16,7 +16,7 @@
       Accept: application/json
     status_code: 200
     return_content: yes
-    register: ticket_details
+  register: ticket_details
 
 - name: create tickets dir to cache ticket contents
   ansible.builtin.file:
