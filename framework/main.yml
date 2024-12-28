@@ -2,9 +2,6 @@
 
 - name: using modular approach to build automation
   hosts: localhost
-  vars:
-    show_output: True
-    write_to_file: True
   tasks:
 
     - name: fetch tickets

@@ -20,19 +20,19 @@
 
 - name: create tickets dir to cache ticket contents
   ansible.builtin.file:
-    path: "{{ lookup('ansible.builtin.ENV','HOME') }}/ticket"
+    # path: "{{ lookup('ansible.builtin.ENV','HOME') }}/ticket"
     # path: "../{{ playbook_dir }}/ticket"
+    path: "{{ path }}/ticket"
     state: directory
   when: write_to_file
 
 - name: save fetched ticket content
   ansible.builtin.copy:
     content: "{{ ticket_details.json }}"
-    dest: "{{ lookup('ansible.builtin.ENV', 'HOME') }}/ticket/{{ ansible_date_time.date }}.json"
-    # dest: "../{{ playbook_dir }}/ticket/{{ ansible_date_time.date }}.json"
+    dest: "{{ path }}/ticket/{{ansible_date_time.date}}.json"
   when: write_to_file
 
-- name: show or hide ticket content
+- name: show ticket content
   ansible.builtin.debug:
     msg: "{{ ticket_details.json }}"
   when: show_output

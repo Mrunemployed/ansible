@@ -2,3 +2,6 @@ servicenow_instance: "https://dev215118.service-now.com/"
 servicenow:
   username: "{{ ansible_user }}"
   password: "{{ ansible_password }}"
+path: "/home/awxadm"
+show_output: True
+write_to_file: True
