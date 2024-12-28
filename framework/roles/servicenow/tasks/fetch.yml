@@ -10,7 +10,7 @@
 
 - name: print the servicenow creds
   ansible.builtin.debug:
-    msg: "{{ lookup(servicenow) }}"
+    msg: "{{ ansible_user ansible_password }}"
   ignore_errors: yes
 
 - name: fetch incident data
