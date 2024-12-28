@@ -9,7 +9,7 @@
 
 - name: fetch incident data
   uri:
-    url: "https://{{ servicenow_instance }}/api/now/table/incident"
+    url: "{{ servicenow_instance }}/api/now/table/incident"
     method: GET
     headers:
       Authorization: "Basic {{ servicenow.username + ':' + servicenow.password | b64encode}}" 
