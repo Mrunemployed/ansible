@@ -1,6 +1,7 @@
-vars:
-  write_to_file: False
-  show_output: False
+- name: init vars
+  set_fact:
+    write_to_file: False
+    show_output: False
 
 - name: fetch incident data
   uri:
