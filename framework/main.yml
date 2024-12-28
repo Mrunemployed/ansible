@@ -2,8 +2,6 @@
 
 - name: using modular approach to build automation
   hosts: localhost
-  become: yes
-  become_user: awxadm
   tasks:
 
     - name: fetch tickets
