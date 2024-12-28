@@ -28,7 +28,7 @@
 - name: save fetched ticket content
   ansible.builtin.copy:
     content: "{{ ticket_details.json }}"
-    dest: "{{ lookup(ansible.builtin.ENV, 'HOME') }}/ticket/{{ ansible_date_time.date }}.json"
+    dest: "{{ lookup('ansible.builtin.ENV', 'HOME') }}/ticket/{{ ansible_date_time.date }}.json"
     # dest: "../{{ playbook_dir }}/ticket/{{ ansible_date_time.date }}.json"
   when: write_to_file
 
