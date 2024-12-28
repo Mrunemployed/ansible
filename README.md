@@ -37,6 +37,5 @@ framework/
 │   ├── otherapis/
 │   │   ├── tasks/
 │   │   │   └── graphql-calls.yml
-└── main_yaml/
-    ├── main.yml
+└──── main.yml
 ```
