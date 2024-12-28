@@ -7,4 +7,3 @@
     write_to_file: True
   roles:
     - role: servicenow
-      tasks_from: fetch.yml
