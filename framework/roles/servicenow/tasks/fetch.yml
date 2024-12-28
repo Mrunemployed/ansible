@@ -1,39 +1,34 @@
-- name: fetch tickets from service-now
-  host: localhost
-  gather_facts: no
-  vars:
-    write_to_file: False
-    show_output: False
-    
-  tasks:
+vars:
+  write_to_file: False
+  show_output: False
 
-    - name: fetch incident data
-      uri:
-        url: "https://{{ servicenow_instance }}/api/now/table/incident"
-        method: GET
-        headers:
-          Authorization: "Basic {{ lookup('ansible.b64encode','SERVICENOW_USERNAME' + ':' + 'SERVICENOW_PASSWORD')}}" 
-          Accept: application/json
-        status_code: 200
-        return_content: yes
-        register: ticket_details
+- name: fetch incident data
+  uri:
+    url: "https://{{ servicenow_instance }}/api/now/table/incident"
+    method: GET
+    headers:
+      Authorization: "Basic {{ lookup('ansible.b64encode','SERVICENOW_USERNAME' + ':' + 'SERVICENOW_PASSWORD')}}" 
+      Accept: application/json
+    status_code: 200
+    return_content: yes
+    register: ticket_details
 
-    - name: create tickets dir to cache ticket contents
-      ansible.builtin.file:
-        # path: "{{ lookup('ansible.builtin.ENV','HOME') }}/ticket"
-        path: "../{{ playbook_dir }}/ticket"
-        state: directory
-      when: write_to_file
+- name: create tickets dir to cache ticket contents
+  ansible.builtin.file:
+    # path: "{{ lookup('ansible.builtin.ENV','HOME') }}/ticket"
+    path: "../{{ playbook_dir }}/ticket"
+    state: directory
+  when: write_to_file
 
-    - name: save fetched ticket content
-      ansible.builtin.copy:
-        content: "{{ ticket_details.json }}"
-        # dest: "{{ lookup(ansible.builtin.ENV, 'HOME') }}/ticket/{{ ansible_date_time.date }}.json"
-        dest: "../{{ playbook_dir }}/ticket/{{ ansible_date_time.date }}.json"
-      when: write_to_file
+- name: save fetched ticket content
+  ansible.builtin.copy:
+    content: "{{ ticket_details.json }}"
+    # dest: "{{ lookup(ansible.builtin.ENV, 'HOME') }}/ticket/{{ ansible_date_time.date }}.json"
+    dest: "../{{ playbook_dir }}/ticket/{{ ansible_date_time.date }}.json"
+  when: write_to_file
 
-    - name: show or hide ticket content
-      ansible.builtin.debug:
-        msg: "{{ ticket_details.json }}"
-      when: show_output
+- name: show or hide ticket content
+  ansible.builtin.debug:
+    msg: "{{ ticket_details.json }}"
+  when: show_output
     
