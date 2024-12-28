@@ -1,0 +1,10 @@
+---
+
+- name: using modular approach to build automation
+  hosts: localhost
+  vars:
+    show_output: True
+    write_to_file: True
+  roles:
+    - role: servicenow
+      tasks_from: fetch.yml
