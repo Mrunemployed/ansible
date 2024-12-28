@@ -1,14 +1,10 @@
-- name: init vars
-  set_fact:
-    write_to_file: False
-    show_output: False
 
 - name: fetch incident data
   uri:
     url: "https://{{ servicenow_instance }}/api/now/table/incident"
     method: GET
     headers:
-      Authorization: "Basic {{ lookup('ansible.b64encode','SERVICENOW_USERNAME' + ':' + 'SERVICENOW_PASSWORD')}}" 
+      Authorization: "Basic {{ servicenow.username + ':' + servicenow.password | ansible.b64encode}}" 
       Accept: application/json
     status_code: 200
     return_content: yes
