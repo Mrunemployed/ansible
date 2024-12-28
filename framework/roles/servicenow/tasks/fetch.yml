@@ -4,7 +4,7 @@
     url: "https://{{ servicenow_instance }}/api/now/table/incident"
     method: GET
     headers:
-      Authorization: "Basic {{ servicenow.username + ':' + servicenow.password | ansible.b64encode}}" 
+      Authorization: "Basic {{ servicenow.username + ':' + servicenow.password | b64encode}}" 
       Accept: application/json
     status_code: 200
     return_content: yes
