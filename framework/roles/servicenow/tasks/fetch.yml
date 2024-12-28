@@ -30,6 +30,7 @@
   ansible.builtin.copy:
     content: "{{ ticket_details.json }}"
     dest: "{{ path }}/ticket/{{ansible_date_time.date}}.json"
+    mode: 0755
   when: write_to_file
 
 - name: show ticket content
