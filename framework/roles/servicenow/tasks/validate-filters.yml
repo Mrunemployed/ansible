@@ -20,13 +20,13 @@
 
 - name: show validation result
   ansible.builtin.debug:
-    msg: "{{ validate.invalid | to_json }}"
+    msg: "{{ validate.invalid }}"
 
 - name: fail if filter params are incorrect
   fail:
     msg: >
       Invalid configuration for filter '{{ item.key }}'
-  with_dict: "{{ validate.invalid | to_json}}"
+  with_dict: "{{ validate.invalid }}"
   when: validate.invalid | length > 0 
 
 - name: build sys_param query
