@@ -1,21 +1,21 @@
 - name: initialize validation engine
   set_fact:
     validate:
-      valid: |
-          {% set valid = {} %}
-          {% for key,val in servicenow['filters'].items() %}
-            {% if val is mapping and True in val.values() and "" not in val.values() %}
-              {% set _ = valid.update({key: val}) %}
-            {% endif %}
-          {% endfor %}
+      valid: >-
+          {%- set valid = {} %}
+          {%- for key,val in servicenow['filters'].items() %}
+            {%- if val is mapping and True in val.values() and "" not in val.values() %}
+              {%- set _ = valid.update({key: val}) %}
+            {%- endif %}
+          {%- endfor %}
           {{ valid | from_yaml}}
-      invalid: |
-          {% set invalid = {} %}
-          {% for key,val in servicenow['filters'].items() %}
-            {% if val is mapping and True in val.values() and "" in val.values() %}
-              {% set _ = invalid.update({key: val}) %}
-            {% endif %}
-          {% endfor %}
+      invalid: >-
+          {%- set invalid = {} %}
+          {%- for key,val in servicenow['filters'].items() %}
+            {%- if val is mapping and True in val.values() and "" in val.values() %}
+              {%- set _ = invalid.update({key: val}) %}
+            {%- endif %}
+          {%- endfor %}
           {{ invalid | from_yaml}}
 
 - name: show validation result
