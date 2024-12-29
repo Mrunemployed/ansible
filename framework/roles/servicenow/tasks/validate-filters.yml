@@ -11,8 +11,10 @@
           {%- set _ = valid.update({key: val}) %}
         {%- endif %}
       {%- endfor %}
-      invalid: {{ invalid }}
-      valid: {{ valid }}
+      {
+        "invalid": {{ invalid }}
+        "valid": {{ valid }}
+      }
 
 - name: show validation result
   ansible.builtin.debug:
