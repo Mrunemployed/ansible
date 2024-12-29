@@ -3,6 +3,12 @@
     valid_filters: {}
     invalid_filters: {}
 
+  
+- name: xxx
+  ansible.builtin.debug:
+    msg: "{{ servicenow.filters }}"
+
+
 - name: start validation engine
   set_fact:
     valid_filters: >-
