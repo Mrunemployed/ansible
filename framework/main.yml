@@ -7,7 +7,7 @@
     - name: validate config
       include_role:
         name: servicenow
-        tasks_from: validate-incs.yml
+        tasks_from: validate-filters.yml
 
     - name: fetch tickets
       include_role:
