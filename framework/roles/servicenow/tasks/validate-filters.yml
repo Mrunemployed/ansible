@@ -11,8 +11,8 @@
           {%- set _ = valid.update({key: val}) %}
         {%- endif %}
       {%- endfor %}
-      {{ invalid }}
-      {{ valid }}
+      invalid: {{ invalid }}
+      valid: {{ valid }}
 
 - name: show validation result
   ansible.builtin.debug:
@@ -23,7 +23,7 @@
     msg: >
       Invalid configuration for filter '{{ item.key }}'
   with_dict: "{{ validate.invalid }}"
-  when: "{{ validate.invalid | length > 0}}"
+  when: "{{ validate.invalid | length > 0 }}"
 
 - name: build sys_param query
   set_fact:
