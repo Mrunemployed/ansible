@@ -26,7 +26,7 @@
   fail:
     msg: >
       Invalid configuration for filter '{{ item.key }}'
-  with_dict: "{{ validate.invalid }}"
+  with_dict: "{{ validate.invalid | to_json}}"
   when: validate.invalid | length > 0 
 
 - name: build sys_param query
