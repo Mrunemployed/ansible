@@ -21,7 +21,8 @@
             {% endif %}
           {% endfor %}
           {{ invalid | to_json }}
-          }
+        }
+      }
 
 - name: show validation result
   ansible.builtin.debug:
