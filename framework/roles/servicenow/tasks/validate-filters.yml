@@ -1,6 +1,11 @@
+- name: set categories
+  set_fact:
+    valid: {}
+    invalid: {}
+
 - name: initialize validation engine
   set_fact:
-    validate:
+    # validate:
       # valid: >-
       #     {%- set valid = {} %}
       #     {%- for key,val in servicenow['filters'].items() %}
@@ -17,21 +22,27 @@
       #       {%- endif %}
       #     {%- endfor %}
       #     {{ invalid | from_yaml}}
-      valid: >-
-        {{
-          valid.update({key: val}) or valid
-          if val is mapping and True in val.values() and "" not in val.values()
-          else valid
-        }}
-      invalid: >-
-        {{
-          invalid.update({key: val}) or invalid
-          if val is mapping and True in val.values() and "" in val.values()
-          else invalid
-        }}
+    valid: >-
+      {{
+        valid.update({key: val}) or valid
+        if val is mapping and True in val.values() and "" not in val.values()
+        else valid
+      }}
+    invalid: >-
+      {{
+        invalid.update({key: val}) or invalid
+        if val is mapping and True in val.values() and "" in val.values()
+        else invalid
+      }}
   with_dict: "{{ servicenow.filters }}"
   loop_control:
     label: "{{ item.key }}"
+
+- name: set the structure
+  set_fact:
+    validate:
+      valid: "{{ valid }}"
+      invalid: "{{ invalid }}"
 
 - name: show validation result
   ansible.builtin.debug:
