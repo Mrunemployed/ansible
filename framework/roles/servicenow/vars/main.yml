@@ -7,6 +7,9 @@ servicenow:
     assignment_group: 
       filter_by_group: True
       assignment_group_id: ""
+    assigned_to:
+      filter_by_assigned_to: True
+      assigned_to_id: "12312fa"
 
 path: "/home/awxadm"
 show_output: True
