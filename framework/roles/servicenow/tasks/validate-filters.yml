@@ -10,6 +10,7 @@
               {%- set _ = valid.update({key: val}) %}
             {%- endif %}
           {%- endfor %}
+          {{ valid | to_json }}
         }
         "invalid":{
 
@@ -19,6 +20,7 @@
               {%- set _ = invalid.update({key: val}) %}
             {%- endif %}
           {%- endfor %}
+          {{ invalid | to_json }}
           }
 
 - name: show validation result
