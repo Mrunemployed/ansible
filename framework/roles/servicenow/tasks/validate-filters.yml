@@ -16,7 +16,7 @@
 
 - name: fail if filter params are incorrect
   fail:
-    msg: >-
+    msg: |
     Invalid configuration for filter '{{ item.item }}'
   with_dict: validate.invalid
   when: "{{ validate.invalid | length > 0}}"
