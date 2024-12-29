@@ -4,22 +4,22 @@
       {
         "valid":{
   
-          {%- set valid = {} %}
-          {%- for key,val in servicenow['filters'].items() %}
-            {%- if val is mapping and True in val.values() and "" not in val.values() %}
-              {%- set _ = valid.update({key: val}) %}
-            {%- endif %}
-          {%- endfor %}
+          {% set valid = {} %}
+          {% for key,val in servicenow['filters'].items() %}
+            {% if val is mapping and True in val.values() and "" not in val.values() %}
+              {% set _ = valid.update({key: val}) %}
+            {% endif %}
+          {% endfor %}
           {{ valid | to_json }}
-        }
+        },
         "invalid":{
 
-          {%- set invalid = {} %}
-          {%- for key,val in servicenow['filters'].items() %}
-            {%- if val is mapping and True in val.values() and "" in val.values() %}
-              {%- set _ = invalid.update({key: val}) %}
-            {%- endif %}
-          {%- endfor %}
+          {% set invalid = {} %}
+          {% for key,val in servicenow['filters'].items() %}
+            {% if val is mapping and True in val.values() and "" in val.values() %}
+              {% set _ = invalid.update({key: val}) %}
+            {% endif %}
+          {% endfor %}
           {{ invalid | to_json }}
           }
 
