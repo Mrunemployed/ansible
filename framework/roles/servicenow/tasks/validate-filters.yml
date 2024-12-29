@@ -1,0 +1,41 @@
+- name: initialize validation engine
+  set_fact:
+    validate: >-
+      {%- set invalid = {} %}
+      {%- set valid = {} %}
+      {%- for key,val in servicenow['filters'].items() %}
+        {%- if val is mapping and True in val.values() and "" in val.values() %}
+          {%- set _ = invalid.update({key: val}) %}
+        {%- endif %}
+        {%- if val is mapping and True in val.values() and "" not in val.values() %}
+          {%- set _ = valid.update({key: val}) %}
+        {%- endif %}
+      {%- endfor %}
+      {{ invalid }}
+      {{ valid }}
+
+- name: fail if filter params are incorrect
+  fail:
+    msg: >-
+    Invalid configuration for filter '{{ item.key }}'
+  with_dict: validate.invalid
+  when: "{{ validate.invalid | length > 0}}"
+
+- name: build sys_param query
+  set_fact:
+    sysparam_query: |
+      {% set query = "" %}
+      {% for key in validate[valid] %}
+        {% if validate['valid'][key] is mapping %}
+          {% if query == "" %}
+            {% set query = query + key +"="+  (validate['valid'][key] | list) [1] %}
+          {% else %}
+            {% set query = "^"+query + key +"="+  (validate['valid'][key] | list) [1] %}
+          {%  endif %}
+        {% endif %}
+      {% endfor %}
+      {{ query }}
+
+- name: show sysparam query
+  ansible.builtin.debug:
+    msg: {{ sysparam_query }}

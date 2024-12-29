@@ -2,6 +2,13 @@ servicenow_instance: "https://dev215118.service-now.com/"
 servicenow:
   username: "{{ ansible_user }}"
   password: "{{ ansible_password }}"
+  filters:
+    fields: "number,short_description,description,assignment_group,state"
+    assignment_group: 
+      filter_by_group: True
+      assignment_group_id: ""
+
 path: "/home/awxadm"
 show_output: True
-write_to_file: True
+write_to_file: False
+show_env: False

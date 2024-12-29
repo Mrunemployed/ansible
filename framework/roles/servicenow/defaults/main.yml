@@ -1,0 +1,23 @@
+servicenow:
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_password }}"
+  # Filters to fetch the matching tickets
+  filters:
+    fields: ""
+    assignment_group: 
+      filter_by_group: False
+      assignment_group_id: ""
+    assigned_to:
+      filter_by_assigned_to: False
+      assigned_to_id: ""
+    ticket_state:
+      filter_by_ticket_state: False
+      ticket_state: ""
+    priority:
+      filter_by_priority: False
+      priority_name: ""
+    by_ticket_id:
+      filter_by_ticket_id: False
+      ticket_id: ""
+    
+    

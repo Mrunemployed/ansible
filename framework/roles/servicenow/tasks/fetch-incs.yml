@@ -6,7 +6,12 @@
 #   ansible.builtin.debug:
 #     msg: "{{ ansible_user }}, {{ ansible_password }}"
 #   ignore_errors: yes
-
+- name: show ansible env vars
+  ansible.builtin.debug:
+    msg: "{{ ansible_env }}"
+  when: show_env
+  ignore_errors: yes
+  
 - name: fetch incident data
   uri:
     url: "{{ servicenow_instance }}/api/now/table/incident"
@@ -14,6 +19,8 @@
     headers:
       Authorization: "Basic {{ (servicenow.username + ':' + servicenow.password) | b64encode}}" 
       Accept: application/json
+    params:
+      
     status_code: 200
     return_content: yes
   register: ticket_details
