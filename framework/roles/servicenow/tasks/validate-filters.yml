@@ -21,7 +21,7 @@
         {{
           valid.update({key: val}) or valid
           if val is mapping and True in val.values() and "" not in val.values()
-          else valid_filters
+          else valid
         }}
       invalid: >-
         {{
@@ -32,7 +32,7 @@
   with_dict: "{{ servicenow.filters }}"
   loop_control:
     label: "{{ item.key }}"
-    
+
 - name: show validation result
   ansible.builtin.debug:
     msg: "{{ validate.invalid }}"
