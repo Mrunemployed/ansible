@@ -16,9 +16,9 @@
 
 - name: fail if filter params are incorrect
   fail:
-    msg: |
-    Invalid configuration for filter '{{ item.item }}'
-  with_dict: validate.invalid
+    msg: >
+      Invalid configuration for filter '{{ item.key }}'
+  with_dict: {{ validate.invalid }}
   when: "{{ validate.invalid | length > 0}}"
 
 - name: build sys_param query
