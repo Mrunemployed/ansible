@@ -38,4 +38,4 @@
 
 - name: show sysparam query
   ansible.builtin.debug:
-    msg: {{ sysparam_query }}
+    msg: "{{ sysparam_query }}"
