@@ -41,30 +41,30 @@
 - name: set the structure
   set_fact:
     validate:
-      valid: "{{ valid }}"
-      invalid: "{{ invalid }}"
+      isvalid: "{{ valid }}"
+      isinvalid: "{{ invalid }}"
 
 - name: show validation result
   ansible.builtin.debug:
-    msg: "{{ validate.invalid }}"
+    msg: "{{ validate.isinvalid }}"
 
 - name: fail if filter params are incorrect
   fail:
     msg: >
       Invalid configuration for filter '{{ item.key }}'
-  with_dict: "{{ validate.invalid }}"
-  when: validate.invalid | length > 0 
+  with_dict: "{{ validate.isinvalid }}"
+  when: validate.isinvalid | length > 0 
 
 - name: build sys_param query
   set_fact:
     sysparam_query: |
       {% set query = "" %}
-      {% for key in validate[valid] %}
-        {% if validate['valid'][key] is mapping %}
+      {% for key in validate['isvalid'] %}
+        {% if validate['isvalid'][key] is mapping %}
           {% if query == "" %}
-            {% set query = query + key +"="+  (validate['valid'][key] | list) [1] %}
+            {% set query = query + key +"="+  (validate['isvalid'][key] | list) [1] %}
           {% else %}
-            {% set query = "^"+query + key +"="+  (validate['valid'][key] | list) [1] %}
+            {% set query = "^"+query + key +"="+  (validate['isvalid'][key] | list) [1] %}
           {%  endif %}
         {% endif %}
       {% endfor %}
