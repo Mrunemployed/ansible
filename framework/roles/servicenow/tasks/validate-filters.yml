@@ -25,6 +25,11 @@
       }}
   with_dict: "{{ servicenow.filters }}"
 
+  - name: xxx2
+    ansible.builtin.debug:
+    msg: "{{ invalid_filters }}"
+
+
 - name:
   set_fact:
     validate:
