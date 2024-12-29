@@ -20,7 +20,7 @@
 
 - name: show validation result
   ansible.builtin.debug:
-    msg: "{{ validate }}"
+    msg: "{{ validate.invalid | to_json }}"
 
 - name: fail if filter params are incorrect
   fail:
