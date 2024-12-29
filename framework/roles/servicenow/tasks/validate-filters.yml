@@ -8,7 +8,7 @@
               {% set _ = valid.update({key: val}) %}
             {% endif %}
           {% endfor %}
-          {{ valid }}
+          {{ valid | from_yaml}}
       invalid: |
           {% set invalid = {} %}
           {% for key,val in servicenow['filters'].items() %}
@@ -16,7 +16,7 @@
               {% set _ = invalid.update({key: val}) %}
             {% endif %}
           {% endfor %}
-          {{ invalid }}
+          {{ invalid | from_yaml}}
 
 - name: show validation result
   ansible.builtin.debug:
