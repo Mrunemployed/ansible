@@ -18,8 +18,6 @@
         else invalid_filters
       }}
   with_dict: "{{ servicenow.filters }}"
-  loop_control:
-    label: "{{ item.key }}"
 
 - name:
   set_fact:
