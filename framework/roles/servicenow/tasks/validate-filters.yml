@@ -11,7 +11,7 @@
 
 - name: start validation engine
   set_fact:
-    valid_filters: |
+    valid_filters: >-
       {% set valids = {} %}
       {% for key,val in servicenow['filters'].items() %}
         {% if val is mapping and True in val.values() and "" not in val.values() %}
@@ -24,7 +24,7 @@
     #   if val is mapping and True in val.values() and "" not in val.values()
     #   else valid_filters
     # }}
-    invalid_filters: |
+    invalid_filters: >-
       {% set valids = {} %}
         {% for key,val in servicenow['filters'].items() %}
           {% if val is mapping and True in val.values() and "" in val.values() %}
