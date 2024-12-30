@@ -11,21 +11,35 @@
 
 - name: start validation engine
   set_fact:
-    valid_filters: >-
-      {{
-        valid_filters.update({key: val}) or valid_filters
-        if val is mapping and True in val.values() and "" not in val.values()
-        else valid_filters
-      }}
-    invalid_filters: >-
-      {{
-        invalid_filters.update({key: val}) or invalid_filters
-        if val is mapping and True in val.values() and "" in val.values()
-        else invalid_filters
-      }}
-  with_dict: "{{ servicenow.filters }}"
-  loop_control:
-    label: "{{ item.key }}"
+    valid_filters: |
+      {% set valids = {} %}
+      {% for key,val in servicenow['filters'].items() %}
+        {% if val is mapping and True in val.values() and "" not in val.values() %}
+          {% set _ = valid_filters.update({key: val}) %}
+        {% endif %}
+      {% endfor %}
+    # {{ valids }}
+    # {{
+    #   valid_filters.update({key: val}) or valid_filters
+    #   if val is mapping and True in val.values() and "" not in val.values()
+    #   else valid_filters
+    # }}
+    invalid_filters: |
+      {% set valids = {} %}
+        {% for key,val in servicenow['filters'].items() %}
+          {% if val is mapping and True in val.values() and "" in val.values() %}
+            {% set _ = invalid_filters.update({key: val}) %}
+          {% endif %}
+        {% endfor %}
+    # {{ valids }}
+    # {{
+    #   invalid_filters.update({key: val}) or invalid_filters
+    #   if val is mapping and True in val.values() and "" in val.values()
+    #   else invalid_filters
+    # }}
+  # with_dict: "{{ servicenow.filters }}"
+  # loop_control:
+  #   label: "{{ item.key }}"
 
 - name: xxx2
   ansible.builtin.debug:
@@ -41,6 +55,7 @@
 - name: show validation result
   ansible.builtin.debug:
     msg: "{{ validate.isinvalid }}"
+  ignpre_errors: yes
 
 - name: fail if filter params are incorrect
   fail:
