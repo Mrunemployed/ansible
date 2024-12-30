@@ -50,8 +50,8 @@
 - name: initialize validation facts
   set_fact:
     validate:
-      isinvalid: "{{ valid_filters_str.splitlines() | map('from_yaml') }}"
-      isvalid: "{{ invalid_filters_str.splitlines() | map('from_yaml') }}"
+      isinvalid: "{{ valid_filters_str.splitlines() | map('from_yaml') | list}}"
+      isvalid: "{{ invalid_filters_str.splitlines() | map('from_yaml') | list}}"
       
 - name: show validation result
   ansible.builtin.debug:
