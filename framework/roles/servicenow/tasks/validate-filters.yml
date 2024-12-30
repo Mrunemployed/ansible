@@ -44,7 +44,7 @@
 
 - name: xxx2
   ansible.builtin.debug:
-    msg: "{{ invalid_filters }}"
+    msg: "{{ invalid_filters_str }}"
 
 
 - name: initialize validation facts
