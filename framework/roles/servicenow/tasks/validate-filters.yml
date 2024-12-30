@@ -36,7 +36,7 @@
 - name: fail if filter params are incorrect
   fail:
     msg: >-
-      Invalid configuration for filter '{{ item.key }}', The Field: '{{ item.values() | list | [1]}}' cannot be blank when '{{ item.values() | list | 0 }}'
+      Invalid configuration for filter '{{ item.key }}', The Field: '{{ item.values() | list | 1}}' cannot be blank when '{{ item.values() | list | 0 }}'
       Please set the configuration settings correctly by setting proper values for '{{ item.values() | list | 1 }}'
   with_dict: "{{ validate.isinvalid }}"
   when: validate.isinvalid | length > 0 
