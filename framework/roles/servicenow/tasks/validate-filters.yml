@@ -24,6 +24,8 @@
         else invalid_filters
       }}
   with_dict: "{{ servicenow.filters }}"
+  loop_control:
+  label: "{{ item.key() }}"
 
 - name: xxx2
   ansible.builtin.debug:
