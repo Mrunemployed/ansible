@@ -55,7 +55,7 @@
 - name: show validation result
   ansible.builtin.debug:
     msg: "{{ validate.isinvalid }}"
-  ignpre_errors: yes
+  ignore_errors: yes
 
 - name: fail if filter params are incorrect
   fail:
