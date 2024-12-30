@@ -42,16 +42,11 @@
   # loop_control:
   #   label: "{{ item.key }}"
 
-- name: xxx2
-  ansible.builtin.debug:
-    msg: "{{ invalid_filters_str }}"
-
-
 - name: initialize validation facts
   set_fact:
     validate:
-      isinvalid: "{{ valid_filters_str.splitlines() | map('from_yaml') | list}}"
-      isvalid: "{{ invalid_filters_str.splitlines() | map('from_yaml') | list}}"
+      isinvalid: "{{ invalid_filters_str.splitlines() | map('from_yaml') | list}}"
+      isvalid: "{{ valid_filters_str.splitlines() | map('from_yaml') | list}}"
       
 - name: show validation result
   ansible.builtin.debug:
@@ -61,7 +56,7 @@
 - name: fail if filter params are incorrect
   fail:
     msg: >
-      Invalid configuration for filter '{{ item.key }}'
+      Invalid configuration for filter '{{ item.key }}' 
   with_dict: "{{ validate.isinvalid }}"
   when: validate.isinvalid | length > 0 
 
