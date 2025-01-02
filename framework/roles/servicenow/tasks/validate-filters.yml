@@ -49,9 +49,9 @@
       {% for key in validate['isvalid'] %}
         {% if validate['isvalid'][key] is mapping %}
           {% if query == "" %}
-            {% set query = query + key +"="+  (validate['isvalid'][key] | list) [1] %}
+            {% set _ = query + key +"="+  (validate['isvalid'][key] | list) [1] %}
           {% else %}
-            {% set query = "^"+query + key +"="+  (validate['isvalid'][key] | list) [1] %}
+            {% set _ = "^"+query + key +"="+  (validate['isvalid'][key] | list) [1] %}
           {%  endif %}
         {% endif %}
       {% endfor %}
