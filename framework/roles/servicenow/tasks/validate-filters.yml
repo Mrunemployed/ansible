@@ -37,10 +37,10 @@
   fail:
     msg: >-
       Invalid configuration for filter {{ item.key }}.
-      The Field: {{ (item.values() | list) [1] }} cannot be blank when {{ (item.values() | list) [0] }}.
-      Please set the configuration settings correctly by setting proper values for {{ (item.values() | list) [1] }}
+      The Field: {{ (item.value | list) [0] }} cannot be blank when {{ (item.values() | list) [1] }} is 'True'.
+      Please set the configuration settings correctly by setting proper values for {{ (item.values() | list) [0] }}
   with_dict: "{{ validate.isinvalid }}"
-  when: validate.isinvalid | length > 0 
+  when: validate.isinvalid | length > 0
 
 - name: build sys_param query
   set_fact:
