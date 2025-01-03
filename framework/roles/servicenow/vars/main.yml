@@ -5,11 +5,11 @@ servicenow:
   filters:
     fields: "number,short_description,description,assignment_group,state"
     assignment_group: 
-      filter_by_group: True
-      assignment_group_id: "abcdx"
+      filter_by_group: False
+      assignment_group_id: ""
     assigned_to:
-      filter_by_assigned_to: True
-      assigned_to_id: "12312fa"
+      filter_by_assigned_to: False
+      assigned_to_id: ""
 
 path: "/home/awxadm"
 show_output: True
