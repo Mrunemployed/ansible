@@ -6,7 +6,10 @@
 #   ansible.builtin.debug:
 #     msg: "{{ ansible_user }}, {{ ansible_password }}"
 #   ignore_errors: yes
-
+- name: validate filters
+  include_role:
+    name: servicenow
+    tasks_from: validate-filters.yml
 
 - name: show ansible env vars
   ansible.builtin.debug:

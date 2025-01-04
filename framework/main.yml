@@ -4,10 +4,10 @@
   hosts: localhost
   tasks:
 
-    - name: validate config
-      include_role:
-        name: servicenow
-        tasks_from: validate-filters.yml
+    # - name: validate config
+    #   include_role:
+    #     name: servicenow
+    #     tasks_from: validate-filters.yml
 
     - name: fetch tickets
       include_role:
