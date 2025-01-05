@@ -27,7 +27,7 @@
     status_code: 200
     return_content: yes
   register: servicenow_resp
-  when: {{ servicenow.checks_passed }}
+  when: servicenow.checks_passed
 
 - name: fetch incident data
   uri:
@@ -39,7 +39,7 @@
     status_code: 200
     return_content: yes
   register: servicenow_resp
-  when: {{ not servicenow.checks_passed }}
+  when: not servicenow.checks_passed
 
 - name: create tickets dir to cache ticket contents
   ansible.builtin.file:
