@@ -45,6 +45,8 @@
 
 - name: build sys_param query
   set_fact:
+    servicenow:
+      checks_passed: True
     sysparam_query: |
       {% set query = [] %}
       {% for item in validate['isvalid'] %}
@@ -52,9 +54,10 @@
         {% set val = (name[1].values() | list)[0] %}
         {% set _ = query.append(name[0] ~ "=" ~ val) %}
       {% endfor %}
-      {{ query | join("^") }}
+      {{query | trim | join("^") | trim}}
+  when: validate.isinvalid | length == 0
 
 - name: show sysparam query
   ansible.builtin.debug:
     msg: "{{ sysparam_query }}"
-  when: show_output
+  when: show_output and validate.isinvalid | length == 0

@@ -3,7 +3,7 @@ servicenow:
   password: "{{ ansible_password }}"
   # Filters to fetch the matching tickets
   filters:
-    fields: ""
+    fields: "number,short_description,description,assignment_group,state"
     assignment_group: 
       filter_by_group: False
       assignment_group_id: ""
@@ -20,5 +20,6 @@ servicenow:
       filter_by_ticket_id: False
       ticket_id: ""
   tickets: []
+  checks_passed: False
     
     
