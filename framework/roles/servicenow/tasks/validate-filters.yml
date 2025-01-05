@@ -32,6 +32,7 @@
   ansible.builtin.debug:
     msg: "{{ validate.isinvalid }}"
   ignore_errors: yes
+  when: show_output
 
 - name: fail if filter params are incorrect
   fail:
@@ -44,7 +45,7 @@
 
 - name: build sys_param query
   set_fact:
-    sysparam_query: |
+    sysparam_query: >-
       {% set query = "" %}
       {% for key in validate['isvalid'] %}
         {% if validate['isvalid'][key] is mapping %}
@@ -60,3 +61,4 @@
 - name: show sysparam query
   ansible.builtin.debug:
     msg: "{{ sysparam_query }}"
+  when: show_output

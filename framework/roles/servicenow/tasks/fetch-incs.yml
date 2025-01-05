@@ -28,6 +28,7 @@
       
     status_code: 200
     return_content: yes
+    
   register: servicenow.tickets
 
 - name: create tickets dir to cache ticket contents
