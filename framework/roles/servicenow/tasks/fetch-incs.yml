@@ -17,7 +17,7 @@
   when: show_env
   ignore_errors: yes
   
-- name: fetch incident data
+- name: fetch filtered incident data
   uri:
     url: "{{ servicenow_instance }}/api/now/table/incident?sysparm_query={{query}}&sysparm_fields={{servicenow.fields}}"
     method: GET
@@ -29,7 +29,7 @@
   register: servicenow_resp
   when: servicenow.checks_passed
 
-- name: fetch incident data
+- name: fetch all incident data
   uri:
     url: "{{ servicenow_instance }}/api/now/table/incident"
     method: GET

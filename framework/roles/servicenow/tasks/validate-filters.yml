@@ -43,6 +43,10 @@
   with_dict: "{{ validate.isinvalid }}"
   when: validate.isinvalid | length > 0
 
+- name: temp task to be removed later
+  ansible.builtin.debug:
+    msg: "{{validate.isinvalid | length == 0}}"
+
 - name: build sys_param query
   set_fact:
     servicenow:
