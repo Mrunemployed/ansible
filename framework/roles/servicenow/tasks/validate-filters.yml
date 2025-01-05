@@ -30,7 +30,7 @@
       
 - name: show validation result
   ansible.builtin.debug:
-    msg: "{{ validate.isinvalid }}"
+    msg: "{{ validate }}"
   ignore_errors: yes
   when: show_output
 
