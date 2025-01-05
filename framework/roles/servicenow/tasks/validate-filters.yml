@@ -53,7 +53,7 @@
         {% if query == "" %}
           {% set query = name[0] ~ "=" ~ val %}
         {% else %}
-          {% set query = query ~ ^ ~ name[0] ~ "=" ~ val %}
+          {% set query = query ~ "^" ~ name[0] ~ "=" ~ val %}
         {%  endif %}
       {% endfor %}
       {{ query }}
