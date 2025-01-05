@@ -48,12 +48,12 @@
     sysparam_query: >-
       {% set query = "" %}
       {% for item in validate['isvalid'] %}
+        {% set name = (item.items() | list)[0] %}
+        {% set val = (name[1].items() | list)[0] %}
         {% if query == "" %}
-          {% set name = (item.items() | list)[0] %}
-          {% set val = (name[1].items() | list)[0] %}
-          {% set _ = query + name[0] +"="+  val %}
+          {% set query = name[0] ~ "=" ~ val %}
         {% else %}
-          {% set _ = "^"+query + name[0] +"="+ val %}
+          {% set query = query ~ ^ ~ name[0] ~ "=" ~ val %}
         {%  endif %}
       {% endfor %}
       {{ query }}
