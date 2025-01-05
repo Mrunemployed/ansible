@@ -45,7 +45,7 @@
 
   - name: build sys_param query
     set_fact:
-      sysparam_query: >-
+      sysparam_query: |
         {% set query = [] %}
         {% for item in validate['isvalid'] %}
           {% set name = (item.items() | list)[0] %}
