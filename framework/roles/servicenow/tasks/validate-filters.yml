@@ -53,7 +53,7 @@
           {% set _ = query.append(name[0] ~ "=" ~ val) %}
           {% set _ = query.append(name[0] ~ "=" ~ val) %}
         {% endfor %}
-        {{ query | join("^") }}
+        "{{ query | join("^") }}"
 
 - name: show sysparam query
   ansible.builtin.debug:
