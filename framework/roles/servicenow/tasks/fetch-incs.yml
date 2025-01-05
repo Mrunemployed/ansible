@@ -28,8 +28,8 @@
       
     status_code: 200
     return_content: yes
-    
-  register: servicenow.tickets
+
+  register: servicenow_resp
 
 - name: create tickets dir to cache ticket contents
   ansible.builtin.file:

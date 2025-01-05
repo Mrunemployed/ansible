@@ -49,8 +49,7 @@
       {% set query = [] %}
       {% for item in validate['isvalid'] %}
         {% set name = (item.items() | list)[0] %}
-        {% set val = (name[1].items() | list)[0] %}
-        {% set _ = query.append(name[0] ~ "=" ~ val) %}
+        {% set val = (name[1].values() | list)[0] %}
         {% set _ = query.append(name[0] ~ "=" ~ val) %}
       {% endfor %}
       {{ query | join("^") }}
