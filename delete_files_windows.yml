@@ -26,9 +26,9 @@
       debug:
         msg: "{{matched_files}}\n{{unmatched_files}}"
 
-    - name: Stop execution remaining tasks if no matching files are found
-      ansible.builtin.meta: end_host
-      when: matched_files | length < 1
+    # - name: Stop execution remaining tasks if no matching files are found
+    #   ansible.builtin.meta: end_host
+    #   when: matched_files | length < 1
 
     - name: Delete matching files
       win_file:
@@ -41,3 +41,8 @@
     - name: Show deleted files
       debug:
         msg: "{{ deleted_files }}"
+    
+    - name: Check if files deleted skipped or failed
+      debug:
+        msg: "{{ 'Successfully Deleted: '+item.item if item.changed else 'Failed to delete '+item.item }}"
+      loop: "{{ deleted_files.results }}"
