@@ -27,11 +27,11 @@
 
     - name: Stop execution remaining tasks if no matching files are found
       ansible.builtin.meta: end_host
-      when: "{{ matched_files | length > 0 }}"
+      when: matched_files | length > 0
 
     - name: Delete matching files
       win_file:
         path: "{{ path | join([item.filename]) }}"
         state: absent
       loop: "{{ matched_files.files }}"
-      when: "{{ matched_files | length > 0 }}"
+      when: atched_files | length > 0
