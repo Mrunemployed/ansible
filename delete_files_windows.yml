@@ -35,4 +35,9 @@
         path: "{{ path }}\\{{ item }}"
         state: absent
       loop: "{{ matched_files }}"
+      register: deleted_files
       when: matched_files | length > 0
+    
+    - name: Show deleted files
+      debug:
+        msg: "{{ deleted_files }}"
