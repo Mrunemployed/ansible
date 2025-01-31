@@ -30,7 +30,7 @@
       when: "{{ matched_files | length > 0 }}"
 
     - name: Delete matching files
-      ansible.windows.win_file:
+      win_file:
         path: "{{ path | join([item.filename]) }}"
         state: absent
       loop: "{{ matched_files.files }}"
