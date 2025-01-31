@@ -31,7 +31,7 @@
 
     - name: Delete matching files
       win_file:
-        path: "{{ path | join([item.filename]) }}"
+        path: "{{ path | join([item]) }}"
         state: absent
-      loop: "{{ matched_files.files }}"
+      loop: "{{ matched_files }}"
       when: atched_files | length > 0
