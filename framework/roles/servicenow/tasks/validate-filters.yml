@@ -41,7 +41,7 @@
       The Field: {{ (item.value | list) [0] }} cannot be blank when {{ (item.values() | list) [1] }} is 'True'.
       Please set the configuration settings correctly by setting proper values for {{ (item.values() | list) [0] }}
   with_dict: "{{ validate.isinvalid }}"
-  when: validate.isinvalid | length > 0
+  when: validate.isinvalid | select('length') | list | length > 0
 
 - name: temp task to be removed later
   ansible.builtin.debug:
@@ -59,9 +59,9 @@
         {% set _ = query.append(name[0] ~ "=" ~ val) %}
       {% endfor %}
       {{query | trim | join("^") | trim}}
-  when: validate.isinvalid | length == 0
+  when: validate.isinvalid | select('length') | list | length == 0
 
 - name: show sysparam query
   ansible.builtin.debug:
     msg: "{{ sysparam_query }}"
-  when: show_output and validate.isinvalid | length == 0
+  when: validate.isinvalid | select('length') | list | length == 0

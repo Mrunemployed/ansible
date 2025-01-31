@@ -16,7 +16,7 @@
     msg: "{{ ansible_env }}"
   when: show_env
   ignore_errors: yes
-  
+
 - name: fetch filtered incident data
   uri:
     url: "{{ servicenow_instance }}/api/now/table/incident?sysparm_query={{query}}&sysparm_fields={{servicenow.fields}}"
@@ -25,9 +25,10 @@
       Authorization: "Basic {{ (servicenow.username + ':' + servicenow.password) | b64encode}}" 
       Accept: application/json
     status_code: 200
+    retries: 5
     return_content: yes
   register: servicenow_resp
-  when: servicenow.checks_passed
+  when: "{{servicenow.checks_passed}}""
 
 - name: fetch all incident data
   uri:
@@ -39,7 +40,7 @@
     status_code: 200
     return_content: yes
   register: servicenow_resp
-  when: not servicenow.checks_passed
+  when: not "{{servicenow.checks_passed}}"
 
 - name: create tickets dir to cache ticket contents
   ansible.builtin.file:

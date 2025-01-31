@@ -9,7 +9,9 @@
     #     name: servicenow
     #     tasks_from: validate-filters.yml
 
-    - name: fetch tickets
+    - name: fetch tickets that are relevant
       include_role:
         name: servicenow
         tasks_from: fetch-incs.yml
+
+  
