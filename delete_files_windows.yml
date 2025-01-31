@@ -28,7 +28,7 @@
 
     - name: Stop execution remaining tasks if no matching files are found
       ansible.builtin.meta: end_host
-      when: matched_files | length > 0
+      when: matched_files | length < 1
 
     - name: Delete matching files
       win_file:
