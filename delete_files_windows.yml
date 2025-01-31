@@ -24,3 +24,14 @@
     - name: show the results
       debug:
         msg: "{{matched_files}}\n{{unmatched_files}}"
+
+    - name: Stop execution remaining tasks if no matching files are found
+      ansible.builtin.meta: end_host
+      when: "{{ matched_files | length > 0 }}"
+
+    - name: Delete matching files
+      ansible.windows.win_file:
+        path: "{{path}}"+"\\"+"{{item}}"
+        state: absent
+      loop: "{{ files }}"
+      when: "{{ matched_files | length > 0 }}"
