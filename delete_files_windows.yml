@@ -32,7 +32,7 @@
 
     - name: Delete matching files
       win_file:
-        path: "{{ path | join([item]) }}"
+        path: "{{ path }}\\{{ item }}"
         state: absent
       loop: "{{ matched_files }}"
       when: matched_files | length > 0
