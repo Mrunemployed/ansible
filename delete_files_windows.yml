@@ -18,8 +18,8 @@
     
     - name: Check if files are found in the location
       set_fact:
-        matched_files: "{{ found_files.files | selectattr('filename','in','files') | map(attribute='path') | list }}"
-        unmatched_files: "{{ found_files.files | rejectattr('filename','in','files') | map(attribute='path') | list }}"
+        matched_files: "{{ found_files.files | selectattr('filename','in','files') | map(attribute='filename') | list }}"
+        unmatched_files: "{{ found_files.files | rejectattr('filename','in','files') | map(attribute='filename') | list }}"
 
     - name: show the results
       debug:
