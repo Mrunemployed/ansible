@@ -35,4 +35,4 @@
         path: "{{ path | join([item]) }}"
         state: absent
       loop: "{{ matched_files }}"
-      when: atched_files | length > 0
+      when: matched_files | length > 0
