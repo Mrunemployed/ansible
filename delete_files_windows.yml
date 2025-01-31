@@ -1,0 +1,26 @@
+---
+- name: Delete files on a windows server
+  hosts: windows
+  become: no
+  vars_files:
+    - vars.yml
+  vars:
+    matched_files: []
+    unmatched_files: []
+  tasks:
+
+    - name: Find files in a directory
+      win_find:
+        paths: "{{path}}"
+        recurse: no  # yes - To search subdirectories as well
+        file_type: file  # To only find files (not directories)
+      register: found_files
+    
+    - name: Check if files are found in the location
+      set_fact:
+        matched_files: "{{ found_files.files | selectattr('name','in','files') | map(attribute='path') | list }}"
+        unmatched_files: "{{ found_files.files | selectattr('name','in','files') | map(attribute='path') | list }}"
+
+    - name: show the results
+      debug:
+        msg: "{{matched_files}}\n{{unmatched_files}}"
