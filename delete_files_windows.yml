@@ -33,7 +33,7 @@
       loop: "{{paths}}"
       register: found_files
     
-    # This task handles the nested element
+    # This task handles the nested elements
     - name: struct a flat list without nested elements
       set_fact:
         list_of_files_in_all_paths: "{{ list_of_files_in_all_paths + (item.files) }}"
@@ -43,7 +43,7 @@
       debug:
         msg: "{{ list_of_files_in_all_paths }}"
   
-    # This will check if the files are 
+    # This will check if the files are in the matching criteria
     - name: Check if files are found in the location
       set_fact:
         matched_files: "{{ matched_files + ([item.path] if item.filename in files else []) }}"
