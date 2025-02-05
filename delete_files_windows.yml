@@ -43,7 +43,7 @@
 
     - name: Delete matching files
       win_file:
-        path: "{{ path }}\\{{ item }}"
+        path: "{{ item.path }}"
         state: absent
       loop: "{{ matched_files }}"
       register: deleted_files
