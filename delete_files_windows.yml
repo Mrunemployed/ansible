@@ -29,8 +29,8 @@
   
     - name: Check if files are found in the location
       set_fact:
-        matched_files: "{{ matched_files + ([item.filename] if item.filename in files else []) }}"
-        unmatched_files: "{{ unmatched_files + ([item.filename] if item.filename not in files else []) }}"
+        matched_files: "{{ matched_files + ([item.path] if item.filename in files else []) }}"
+        unmatched_files: "{{ unmatched_files + ([item.path] if item.filename not in files else []) }}"
       loop: "{{ list_of_files_in_all_paths }}"
 
     - name: show the results
@@ -43,7 +43,7 @@
 
     - name: Delete matching files
       win_file:
-        path: "{{ item.path }}"
+        path: "{{ item }}"
         state: absent
       loop: "{{ matched_files }}"
       register: deleted_files
