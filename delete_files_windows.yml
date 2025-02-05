@@ -25,7 +25,8 @@
       set_fact:
         matched_files: "{{ matched_files + ([item.filename] if item.filename in files else []) }}"
         unmatched_files: "{{ unmatched_files + ([item.filename] if item.filename not in files else []) }}"
-      loop: "{{ found_files.files }}"
+      loop: "{{item.files}}"
+      loop: "{{ found_files.results }}"
 
     - name: show the results
       debug:
