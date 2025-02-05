@@ -11,11 +11,16 @@
 
     - name: Find files in a directory
       win_find:
-        paths: "{{path}}"
+        paths: "{{ item }}"
         recurse: no  # yes - To search subdirectories as well
         file_type: file  # To only find files (not directories)
+      loop: "{{paths}}"
       register: found_files
     
+    - name: Show the found files in different paths
+      debug:
+        msg: "{{ found_files }}"
+
     - name: Check if files are found in the location
       set_fact:
         matched_files: "{{ matched_files + ([item.filename] if item.filename in files else []) }}"
@@ -44,5 +49,5 @@
     
     - name: Check if files deleted skipped or failed
       debug:
-        msg: "{{ 'Successfully Deleted: '+item.item if item.changed else 'Failed to delete '+item.item }}"
+        msg: "{{ 'Successfully Deleted: '+item.item if item.changed and item.failed else 'Failed to delete '+item.item }}"
       loop: "{{ deleted_files.results }}"
