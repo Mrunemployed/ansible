@@ -23,6 +23,10 @@
         list_of_files_in_all_paths: "{{ list_of_files_in_all_paths + (item.files) }}"
       loop: "{{ found_files.results }}"
 
+    - name: Show the flat list
+      debug:
+        msg: "{{ list_of_files_in_all_paths }}"
+  
     - name: Check if files are found in the location
       set_fact:
         matched_files: "{{ matched_files + ([item.filename] if item.filename in files else []) }}"
