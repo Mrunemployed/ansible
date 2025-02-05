@@ -7,6 +7,7 @@
   vars:
     matched_files: []
     unmatched_files: []
+    list_of_files_in_all_paths: []
   tasks:
 
     - name: Find files in a directory
@@ -17,16 +18,16 @@
       loop: "{{paths}}"
       register: found_files
     
-    - name: Show the found files in different paths
-      debug:
-        msg: "{{ found_files }}"
+    - name: struct a flat list without nested elements
+      set_fact:
+        list_of_files_in_all_paths: "{{ list_of_files_in_all_paths + item.files }}"
+      loop: "{{ found_files.results }}"
 
     - name: Check if files are found in the location
       set_fact:
         matched_files: "{{ matched_files + ([item.filename] if item.filename in files else []) }}"
         unmatched_files: "{{ unmatched_files + ([item.filename] if item.filename not in files else []) }}"
-      loop: "{{item.files}}"
-      loop: "{{ found_files.results }}"
+      loop: "{{ list_of_files_in_all_paths }}"
 
     - name: show the results
       debug:
