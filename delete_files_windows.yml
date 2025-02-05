@@ -20,7 +20,7 @@
     
     - name: struct a flat list without nested elements
       set_fact:
-        list_of_files_in_all_paths: "{{ list_of_files_in_all_paths + item.files }}"
+        list_of_files_in_all_paths: "{{ list_of_files_in_all_paths + (item.files) }}"
       loop: "{{ found_files.results }}"
 
     - name: Check if files are found in the location
